@@ -14,8 +14,10 @@ public class TodoMain {
 		TodoList l = new TodoList();
 		boolean isList = false;
 		boolean quit = false;
+		TodoUtil.loadList(l, "todolist.txt");
+		Menu.displaymenu();
 		do {
-			Menu.displaymenu();
+			Menu.prompt();
 			isList = false;
 			String choice = sc.next();
 			switch (choice) {
@@ -55,13 +57,20 @@ public class TodoMain {
 			case "exit":
 				quit = true;
 				break;
-
+				
+			case "help":
+				Menu.displaymenu();
+				break;
+				
 			default:
-				System.out.println("please enter one of the above mentioned command");
+				System.out.println("\n위의 명령어 중에서 선택하세요. (help - 도움말)");
+				System.out.println();
 				break;
 			}
 			
 			if(isList) l.listAll();
 		} while (!quit);
+		TodoUtil.saveList(l, "todolist.txt");
+		sc.close();
 	}
 }
