@@ -1,7 +1,6 @@
 package com.todo.dao;
 
 import java.util.*;
-
 import com.todo.service.TodoSortByDate;
 import com.todo.service.TodoSortByName;
 
@@ -12,6 +11,10 @@ public class TodoList {
 		this.list = new ArrayList<TodoItem>();
 	}
 
+	public int getNumOf() {
+		return list.size();
+	}
+	
 	public void addItem(TodoItem t) {
 		list.add(t);
 	}
@@ -32,13 +35,14 @@ public class TodoList {
 
 	public void sortByName() {
 		Collections.sort(list, new TodoSortByName());
-
 	}
 
 	public void listAll() {
-		System.out.println("\n[전체 목록]");
+		System.out.println("\n[전체 목록, 총 " + this.getNumOf() + "개]");
 		for (TodoItem item : list) {
-			System.out.println("[" + item.getTitle() + "]\t" + item.getDesc() + " - " + item.getCurrent_date());
+			System.out.println(	list.indexOf(item)+1 + ". [" + item.getCategory() + "] " 
+								+ item.getTitle() + " - " + item.getDesc() + " - "
+								+ item.getDue_date() + " - " + item.getCurrent_date());
 		}
 		System.out.println();
 	}
@@ -60,5 +64,14 @@ public class TodoList {
 			if (title.equals(item.getTitle())) return true;
 		}
 		return false;
+	}
+
+	public TodoItem get(Integer num) {
+		for (TodoItem item : list) {
+			if (num.equals(list.indexOf(item)+1)) {
+				return item;
+			}
+		}
+		return null;
 	}
 }

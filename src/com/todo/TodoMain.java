@@ -37,6 +37,20 @@ public class TodoMain {
 			case "ls":
 				TodoUtil.listAll(l);
 				break;
+				
+			case "ls_cate":
+				TodoUtil.listAllCategory(l);
+				break;
+				
+			case "find":
+				String keyword = sc.next();
+				TodoUtil.findItem(l, keyword);
+				break;
+				
+			case "find_cate":
+				String keywordCate = sc.next();
+				TodoUtil.findItemCategory(l, keywordCate);
+				break;	
 
 			case "ls_name_asc":
 				l.sortByName();
@@ -54,6 +68,12 @@ public class TodoMain {
 				isList = true;
 				break;
 
+			case "ls_date_desc":
+				l.sortByDate();
+				l.reverseList();
+				isList = true;
+				break;
+				
 			case "exit":
 				quit = true;
 				break;
@@ -63,7 +83,7 @@ public class TodoMain {
 				break;
 				
 			default:
-				System.out.println("\n위의 명령어 중에서 선택하세요. (help - 도움말)");
+				System.out.println("\n정해진 명령어 중에서 선택하세요. (help - 도움말)");
 				System.out.println();
 				break;
 			}
